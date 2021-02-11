@@ -1,0 +1,20 @@
+.main-container{
+    width: 75%; 
+    margin: 0 auto;
+}
+.start-button-container > a{
+    text-decoration: none;
+    color: white;
+    background-color: teal;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 100px;
+}
+.start-button-container > a:hover{
+    background-color: blue;
+}
+@media screen and(max-width: 767px){
+    .main-container{
+        width: 100%;
+    }
+}
