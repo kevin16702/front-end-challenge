@@ -1,6 +1,10 @@
 .main-container{
     width: 75%; 
     margin: 0 auto;
+    text-align: center;
+}
+#statement{
+    margin-bottom: 10px;
 }
 .start-button-container > a{
     text-decoration: none;
@@ -12,6 +16,23 @@
 }
 .start-button-container > a:hover{
     background-color: blue;
+}
+
+#button-container{
+    display: flex;
+    flex-direction: column;
+}
+.button{
+    margin: 0 auto;
+    width: 300px;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: teal;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
 }
 @media screen and(max-width: 767px){
     .main-container{

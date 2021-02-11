@@ -1,24 +1,38 @@
-let container = document.getElementByID('container');
-let title = document.getElementByID('question');
-let buttoncontainer = document.getElementByID('buttoncontainer');
+let count = -1;
 
-let questions = [
-    ["homo's moeten geaccepteerd worden in de maatschappij", 'prog-cons'],
-    ['des te vrijer de economie des te vrijer de mens', 'lib-auth'],
-    ['de overheid moet zorgen voor hun burgers', 'left-right'],
-    ['onderwijs moet gratis', 'left-right'],
-    ['politie moet harder optreden', 'lib-auth'],
-];
+const title = document.getElementById('question');
+const buttonContainer = document.getElementById('button-container');
+const statementParagraph = document.getElementById('statement');
 
 let buttons = [
-    'helemaal mee eens',
-    'mee eens',
+    'eens',
     'neutraal / niet zeker',
-    'mee oneens',
-    'helemaal mee oneens'
+    'oneens',
 ]
-
-for(let i = 0; i < buttons.length; i++)
-{
-
+if(count = -1){
+    var startBtn = document.createElement('button');
+    startBtn.innerHTML = 'start';
+    startBtn.classList.add('button');
+    buttonContainer.appendChild(startBtn);
+    startBtn.onclick = function() {
+        count++;
+        clickEvent();
+        startGame();
+    }
+}
+function startGame(){
+    buttonContainer.removeChild(startBtn);
+    for(let i = 0; i < buttons.length; i++)
+    {
+        let btn = document.createElement('button');
+        btn.innerHTML = buttons[i];
+        btn.classList.add('button');
+        buttonContainer.appendChild(btn);
+        btn.onclick = clickEvent;
+    }
+}
+function clickEvent(){
+    title.innerHTML = subjects[count].title;
+    statement.innerHTML = subjects[count].statement;
+    count++
 }
