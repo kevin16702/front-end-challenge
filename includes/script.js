@@ -9,15 +9,15 @@ const backButton = document.getElementById('back-arrow');
 const homeScreenButton = document.getElementById('homescreen-button')
 
 let buttons = [
-    'eens',
-    'neutraal / niet zeker',
-    'oneens',
-    'skip',
+    ['eens', `pro`] ,
+    ['neutraal / niet zeker', `none`],
+    ['oneens', `contra`],
+    ['skip', `placeholder`],
 ]
 
 // create startButton
 
-function createStartButton(){
+function createStartButton(){   
     let startBtn = document.createElement('button');
     startBtn.innerHTML = 'start';
     startBtn.classList.add('button');
@@ -28,14 +28,20 @@ function createStartButton(){
 
 if(count = -1){
     startBtn = createStartButton();
-    startBtn.onclick = function() {
-        homeScreenButton.classList.remove('hidden');
-        let placeholder = 3;
-        subStep(placeholder, count);
-        Quiz();
-    }
+    startGame();
 }
 
+// Start game function
+
+function startGame(){
+
+        startBtn.onclick = function() {
+            homeScreenButton.classList.remove('hidden');
+            let placeholder = 3;
+            subStep(placeholder, count);
+            Quiz();
+        }
+    }
 
 // Starts the quiz and appends the buttons to the container
 
@@ -44,21 +50,22 @@ function Quiz(){
         for(let i = 0; i < buttons.length; i++)
         {
             let btn = document.createElement('button');
-            btn.innerHTML = buttons[i];
+            btn.innerHTML = buttons[i][0];
+            btn.value = buttons[i][1];
             btn.classList.add('button');
             buttonContainer.appendChild(btn);
             btn.onclick = function () {
-                subStep(i); 
+                position = btn.value;
+                subStep(i);
+                CountParty(position); 
         }
     }
 }
-
 
 // Adds a function to perform code between steps
 
 function subStep(i){
     count++
-    console.log(count)
 
     if(count == 1){
         backButton.classList.remove('hidden');
@@ -114,11 +121,39 @@ function getResults(){
 
 homeScreenButton.onclick = function(){
     homeScreenButton.classList.add('hidden');
-    count = 0;  
+    count = -1;  
     title.innerHTML = 'Stemwijzer';
     statementParagraph.innerHTML = 'Welkom bij de stemwijzer';
-    for(i = 0; i < buttons.length; i++){
-        console.log(i);
-        buttonContainer.removeChild(buttonContainer.childNodes[0]);
+    for(let i = 0; i < 4; i++){
+        buttonContainer.innerHTML = ``;
     }
+    startBtn = createStartButton();
+    startGame();
+}
+
+// Make points array
+
+let points = [];
+for(i = 0; i < subjects[0][`parties`].length; i++){
+    points[i] = [subjects[0][`parties`][i][`name`], 0];
+}
+
+// Count party
+
+
+function CountParty(position){
+    // console.log(position);
+    for(i = 0; i < subjects[0][`parties`].length; i++){
+        console.table(subjects[count][`parties`][i][`position`])
+
+        if(subjects[count][`parties`][i][`position`] === position){
+            console.log(true);  
+            points[i][1]++;
+        }
+
+    }
+    // console.table(subjects[count][`parties`])
+        // console.table(points);
+    // console.log(subjects);
+    // console.log(subjects[][`parties`][i][`position`]);
 }
