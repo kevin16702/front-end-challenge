@@ -1,4 +1,4 @@
-.main-container{
+.container{
     width: 75%; 
     margin: 0 auto;
     text-align: center;
@@ -41,6 +41,31 @@
     padding: 10px 20px;
     font-size: 20px;
     border-radius: 10px;
+    border: none;
+}
+
+.button:hover{
+    cursor: pointer;
+}
+.blue{
+   background-color: #1e88e5;
+}
+
+#homescreen-button{
+    width: 600px;
+    margin-bottom: 20px;
+    background-color: #1e88e5;
+}
+
+#result-container{
+    width: 80%;
+    margin: 0 auto;
+}
+#result-container > div{
+    background-color: teal;
+    text-align: left;
+    padding: 10px;
+    margin-top: 10px;
 }
 @media screen and(max-width: 767px){
     .main-container{

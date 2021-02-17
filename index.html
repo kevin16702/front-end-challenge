@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +7,24 @@
     <link rel="stylesheet" href="includes/stylesheet.css">
     <title>Stemwijzer</title>
 </head>
-
 <body>
     <header class="w3-teal w3-padding-small w3-center">
         <div>Stemwijzer</div>
     </header>
-    <div class="main-container">
+    <div class="container">
         <h1 id="question" class="w3-padding-32">Stemwijzer</h1>
         <div id="statement">Welkom bij de stemwijzer</div>
         <img src="includes/back-arrow.svg" id="back-arrow" class="hidden">
-        <button id="homescreen-button" class="hidden">Ga terug naar homescreen</button>
+        <button id="homescreen-button" class="hidden button">Ga terug naar homescreen</button>
         <div id="button-container">
         </div>
+        <div id="result-container">
+        </div>
+    </div>
+    <div id="changeweight-container" class='container'>
+    <button id='changeWeight' class="button">Verander gewicht van de vragen</button>
     </div>
 </body>
 <script src="http://stemwijzer.dvc-icta.nl/data.js" type="text/javascript"></script>
 <script src="includes/script.js" type="text/javascript"></script>
-
 </html>
