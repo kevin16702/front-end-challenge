@@ -11,7 +11,7 @@
     <header class="w3-teal w3-padding-small w3-center">
         <div>Stemwijzer</div>
     </header>
-    <div class="container">
+    <div class="container" id=''>
         <h1 id="question" class="w3-padding-32">Stemwijzer</h1>
         <div id="statement">Welkom bij de stemwijzer</div>
         <img src="includes/back-arrow.svg" id="back-arrow" class="hidden">
@@ -21,7 +21,11 @@
         <div id="result-container">
         </div>
     </div>
+    <div id="big-party-container" class="container">
+        <label>Laat alleen de grote partijen zien<input id="big-party-checkbox" type="checkbox"></label>
+    </div>
     <div id="changeweight-container" class='container'>
+        <div id="weighted-questions-container"></div>
     <button id='changeWeight' class="button">Verander gewicht van de vragen</button>
     </div>
 </body>
