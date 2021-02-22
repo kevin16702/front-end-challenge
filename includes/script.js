@@ -109,7 +109,7 @@ function subStep(btn){
 // Performs the click event
 
 function clickEvent(){
-    if(count == 5){
+    if(count == subjects.length - 1){
         finalCount(choices);
         displayResultsSubstep(points);
         return;
