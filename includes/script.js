@@ -152,9 +152,8 @@ function backButtonClick(){
 
 // Goes back to homescreen
 
-homeScreenButton.onclick = function(){
-    
-    changeWeightContainer.style.display = 'flex';
+homeScreenButton.onclick = function(){    
+    changeWeightContainer.style.display = 'none';
     bigPartyContainer.style.display = 'flex';
     sessionChoices = makeSessionChoices();
     choices = [NaN];
@@ -265,6 +264,7 @@ function finalCount(choices){
 // Displays seculair and non seculair parties
 
 function displayResultsSubstep(){
+    changeWeightContainer.style.display = 'flex';
     title.innerHTML = 'Selecteer welke partijen je toont';
     statementParagraph.innerHTML = '';
     buttonContainer.innerHTML = '';
@@ -295,6 +295,7 @@ function displayResultsSubstep(){
 // Displays the result screen
 
 function displayResults(points, selectedOption){
+        changeWeightContainer.style.display = 'none';
         title.innerHTML = 'Resulaten';
         statementParagraph.innerHTML = '';
         buttonContainer.innerHTML = '';
@@ -314,6 +315,7 @@ function displayResults(points, selectedOption){
             }
         }
     }
+    backButton.style.display = 'none';
 }
 function createResultsBar(){
     let result = document.createElement('div');
