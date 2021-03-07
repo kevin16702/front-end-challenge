@@ -1,14 +1,13 @@
 // Creating variables
 
 let count = -1;
-
+console.log(subjects.length);
 const bigparties = 15;
 
 const title = document.getElementById('question');
 const buttonContainer = document.getElementById('button-container');
 const statementParagraph = document.getElementById('statement');
 const backButton = document.getElementById('back-arrow');
-const homeScreenButton = document.getElementById('homescreen-button');
 const resultContainer = document.getElementById('result-container');
 const changeWeightContainer = document.getElementById('changeweight-container');
 const weightedQuestionsContainer = document.getElementById('weighted-questions-container');
@@ -17,10 +16,10 @@ const bigPartyContainer = document.getElementById('big-party-container');
 const bigPartyCheckbox = document.getElementById('big-party-checkbox');
 
 let buttons = [
-    ['eens', `pro`] ,
-    ['neutraal / niet zeker', `none`],
-    ['oneens', `contra`],
-    ['skip', 'skip'],
+    ['Eens', `pro`] ,
+    ['Geen van beide', `none`],
+    ['Oneens', `contra`],
+    ['Overslaan', 'skip'],
 ]
 
 // create startButton
@@ -36,32 +35,32 @@ function createStartButton(){
 
 if(count = -1){
     startBtn = createStartButton();
-    startGame();
+    startGame(startBtn);
 }
 
 // Start game function
 
-function startGame(sessionChoices){
+function startGame(startBtn){
         startBtn.onclick = function() {
-            homeScreenButton.classList.remove('hidden');
             let placeholder = 3;
             subStep(placeholder, count);
-            Quiz(sessionChoices);
+            startQuestions();
         }
     }
 
 // Starts the quiz and appends the buttons to the container
 
-function Quiz(sessionChoices){
+function startQuestions(sessionChoices){
     changeWeightContainer.style.display = 'none';
     bigPartyContainer.style.display = 'none';
     let sessionCount = 1;
-    buttonContainer.removeChild(startBtn);
+    buttonContainer.innerHTML = '';
         for(let i = 0; i < buttons.length; i++)
         {
             let btn = document.createElement('button');
             btn.innerHTML = buttons[i][0];
             btn.value = buttons[i][1];
+            btn.classList.add(buttons[i][1]);
             btn.classList.add('button');
             buttonContainer.appendChild(btn);  
             btn.onclick = function () {
@@ -100,7 +99,7 @@ function Quiz(sessionChoices){
 
 function subStep(btn){
     count++
-    if(count == 1){
+    if(count == 0){
         backButton.classList.remove('hidden');
     }
     clickEvent();
@@ -109,7 +108,8 @@ function subStep(btn){
 // Performs the click event
 
 function clickEvent(){
-    if(count == subjects.length - 1){
+    console.log(count);
+    if(count == subjects.length ){
         finalCount(choices);
         displayResultsSubstep(points);
         return;
@@ -126,15 +126,23 @@ function clickEvent(){
 
 function backButtonClick(){
     count--;
-    if(count < 1){
+    console.log(choices);
+    if(count < 0){
+        buttonContainer.innerHTML = '';
+        let startBtn = createStartButton();
         backButton.classList.add('hidden');
+        question.innerHTML = 'Tweede kamer verkiezingen 2021';
+        statementParagraph.innerHTML = 'welkom bij de stemwijzer';
+            startGame(startBtn);
+        return;
     }
-    if(count == 4){
+    if(count == subjects.length - 1  ){
         resultContainer.innerHTML = '';
         buttonContainer.innerHTML = '';
         for(i = 0; i < buttons.length; i++){
             let btn = document.createElement('button');
             btn.innerHTML = buttons[i][0];
+            btn.classList.add(buttons[i][1]);
             btn.value = buttons[i][1];
             btn.classList.add('button');
             buttonContainer.appendChild(btn);
@@ -145,30 +153,17 @@ function backButtonClick(){
         }   
         }
     }
+    for(i = 0; i < buttonContainer.children.length; i ++){
+        let btn = buttonContainer.childNodes[i];
+        btn.classList.remove('blue');
+        console.log(count);
+        if(btn.value == choices[count]){
+            btn.classList.add('blue');
+        }
+    }
     choices.pop();
     title.innerHTML = subjects[count].title;
     statement.innerHTML = subjects[count].statement;
-}
-
-// Goes back to homescreen
-
-homeScreenButton.onclick = function(){    
-    changeWeightContainer.style.display = 'none';
-    bigPartyContainer.style.display = 'flex';
-    sessionChoices = makeSessionChoices();
-    choices = [NaN];
-    backButton.classList.add('hidden');
-    points = makePointsArray();
-    homeScreenButton.classList.add('hidden');
-    resultContainer.innerHTML = ''
-    count = -1;  
-    title.innerHTML = 'Stemwijzer';
-    statementParagraph.innerHTML = 'Welkom bij de stemwijzer';
-    for(let i = 0; i < 4; i++){
-        buttonContainer.innerHTML = ``;
-    }
-    startBtn = createStartButton();
-    startGame(sessionChoices);
 }
 
 // Make points array
@@ -192,7 +187,7 @@ points.sort(function (a, b) {
 
 // Pushes answers in array
 
-let choices = [NaN];
+let choices = [];
 function pushPositionInArray(position){
     choices.push(position);
 }
@@ -329,7 +324,6 @@ function displayResultsBars(points, selectedOption){
         createResultsBar(points);
         } else{
             if(selectedOption == SecularAndSeats[o][1].toString()){
-                console.log(false);
                 createResultsBar(points);
             }
         }
