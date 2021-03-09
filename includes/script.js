@@ -1,7 +1,6 @@
 // Creating variables
 
 let count = -1;
-console.log(subjects.length);
 const bigparties = 15;
 
 const title = document.getElementById('question');
@@ -57,12 +56,7 @@ function startQuestions(sessionChoices){
     buttonContainer.innerHTML = '';
         for(let i = 0; i < buttons.length; i++)
         {
-            let btn = document.createElement('button');
-            btn.innerHTML = buttons[i][0];
-            btn.value = buttons[i][1];
-            btn.classList.add(buttons[i][1]);
-            btn.classList.add('button');
-            buttonContainer.appendChild(btn);  
+            let btn = makeButton(i); 
             btn.onclick = function () {
                 position = btn.value;
                 pushPositionInArray(position); 
@@ -108,7 +102,6 @@ function subStep(btn){
 // Performs the click event
 
 function clickEvent(){
-    console.log(count);
     if(count == subjects.length ){
         finalCount(choices);
         displayResultsSubstep(points);
@@ -122,11 +115,22 @@ function clickEvent(){
     }
 }
 
+// Makes a button
+
+function makeButton(i){
+    let btn = document.createElement('button');
+    btn.innerHTML = buttons[i][0];
+    btn.classList.add(buttons[i][1]);
+    btn.value = buttons[i][1];
+    btn.classList.add('button');
+    buttonContainer.appendChild(btn);
+    return btn;
+}
+
 // This function performs the go back event
 
 function backButtonClick(){
     count--;
-    console.log(choices);
     if(count < 0){
         buttonContainer.innerHTML = '';
         let startBtn = createStartButton();
@@ -139,13 +143,9 @@ function backButtonClick(){
     if(count == subjects.length - 1  ){
         resultContainer.innerHTML = '';
         buttonContainer.innerHTML = '';
+        changeWeightContainer.style.display = 'none';
         for(i = 0; i < buttons.length; i++){
-            let btn = document.createElement('button');
-            btn.innerHTML = buttons[i][0];
-            btn.classList.add(buttons[i][1]);
-            btn.value = buttons[i][1];
-            btn.classList.add('button');
-            buttonContainer.appendChild(btn);
+            let btn = makeButton(i);
             btn.onclick = function () {
                 position = btn.value;
                 pushPositionInArray(position); 
@@ -156,7 +156,6 @@ function backButtonClick(){
     for(i = 0; i < buttonContainer.children.length; i ++){
         let btn = buttonContainer.childNodes[i];
         btn.classList.remove('blue');
-        console.log(count);
         if(btn.value == choices[count]){
             btn.classList.add('blue');
         }
@@ -310,7 +309,6 @@ function displayResults(points, selectedOption){
             }
         }
     }
-    backButton.style.display = 'none';
 }
 function createResultsBar(){
     let result = document.createElement('div');
